@@ -10,6 +10,9 @@ var barHeigth = 150;
 var BAR_WIDTH = 40;
 var DISTANCE = 50;
 
+var MAX_BAR_HEIGHT = 150;
+var GISTOGRAMM_MARGIN_TOP = 100;
+
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
@@ -41,6 +44,11 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     var name = names[i];
 
+    var barWidth = 40;
+    var barHeight = (MAX_BAR_HEIGHT * times[i]) / maxTime;
+    var barX = 120;
+    var barY = GISTOGRAMM_MARGIN_TOP + MAX_BAR_HEIGHT - barHeight;
+
     if (name === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       ctx.filter = 'none';
@@ -49,10 +57,10 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.filter = 'saturate(' + Math.random() + ')';
     }
 
-    ctx.fillRect(CLOUD_X + GAP + GAP + (BAR_WIDTH + DISTANCE) * i, CLOUD_Y + BAR_WIDTH + DISTANCE, BAR_WIDTH, (barHeigth * times[i]) / maxTime);
+    ctx.fillRect(barX + (BAR_WIDTH + DISTANCE) * i, barY, barWidth, barHeight);
 
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), CLOUD_X + GAP + GAP + (BAR_WIDTH + DISTANCE) * i, BAR_WIDTH + DISTANCE);
-    ctx.fillText(names[i], CLOUD_X + GAP + GAP + (BAR_WIDTH + DISTANCE) * i, CLOUD_Y + barHeigth + TEXT_WIDTH + TEXT_WIDTH + GAP);
+    ctx.fillText(Math.round(times[i]), barX + (BAR_WIDTH + DISTANCE) * i, barY - GAP);
+    ctx.fillText(names[i], barX + (BAR_WIDTH + DISTANCE) * i, CLOUD_Y + barHeigth + TEXT_WIDTH + TEXT_WIDTH + GAP);
   }
 };
