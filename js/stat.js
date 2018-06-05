@@ -6,7 +6,6 @@ var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var GAP = 10;
 var TEXT_WIDTH = 50;
-var barHeigth = 150;
 var BAR_WIDTH = 40;
 var DISTANCE = 50;
 
@@ -61,6 +60,6 @@ window.renderStatistics = function (ctx, names, times) {
 
     ctx.fillStyle = '#000';
     ctx.fillText(Math.round(times[i]), barX + (BAR_WIDTH + DISTANCE) * i, barY - GAP);
-    ctx.fillText(names[i], barX + (BAR_WIDTH + DISTANCE) * i, CLOUD_Y + barHeigth + TEXT_WIDTH + TEXT_WIDTH + GAP);
+    ctx.fillText(names[i], barX + (BAR_WIDTH + DISTANCE) * i, CLOUD_Y + MAX_BAR_HEIGHT + TEXT_WIDTH + TEXT_WIDTH + GAP);
   }
 };
